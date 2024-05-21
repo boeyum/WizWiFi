@@ -1,0 +1,19 @@
+{
+  "pair": {
+    "start": {
+      "deviceName": "Device name",
+      "error": "An error has occurred.",
+      "not_found": "The device is not found or parameter missmatch.",
+      "intro": "Enter device IP address<br/><br/>IP can be found in the WIZ app under device, section \"settings - device info\".<br/><br/>Please use form-button to add the settings!",
+      "invalidIP": "Please enter a valid IPv4 address, e.g. 192.168.1.10",
+      "ipAddress": "IP address",
+      "required": "IP address is a required value.",
+      "saveSettings": "Save settings",
+      "title01": "Connect WizColor",
+      "title02": "Connect WizDimmable",
+      "title03": "Connect WizPowerSocket",
+      "title04": "Connect WizSocket",
+      "title05": "Connect WizTunable"
+    }
+  }
+}
