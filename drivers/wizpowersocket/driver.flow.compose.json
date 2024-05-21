@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "id": "pplug_onoff",
+      "title": {
+        "en": "The device !{{is|isn't}} on"
+      },
+      "titleFormatted": {
+        "en": "The device !{{is|isn't}} on"
+      }
+    },
+    {
+      "id": "pplug_power",
+      "title": {
+        "en": "Watt"
+      },
+      "titleFormatted": {
+        "en": "Watt exceeds [[nwatt]]"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "nwatt",
+          "min": 0,
+          "max": 2300,
+          "step": 1
+        }
+      ]
+    }
+  ]
+}

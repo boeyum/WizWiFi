@@ -1,0 +1,47 @@
+{
+  "name": {
+    "en": "WizColor"
+  },
+  "class": "light",
+  "capabilities": [
+    "wiz_colorscene",
+    "light_saturation",
+    "light_temperature",
+    "light_mode",
+    "light_hue",
+    "dim",
+    "onoff"
+  ],
+  "capabilitiesOptions": {
+    "dim": {
+      "min": 0,
+      "max": 100,
+      "step": 1
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "pair": [
+    {
+      "id": "enter_ip"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": { "next": "add_devices" }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  }
+}

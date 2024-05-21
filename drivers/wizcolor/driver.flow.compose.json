@@ -1,0 +1,240 @@
+{
+  "conditions": [
+    {
+      "id": "wfcolor_onoff",
+      "title": {
+        "en": "The device !{{is|isn't}} on"
+      },
+      "titleFormatted": {
+        "en": "The device !{{is|isn't}} on"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "wfcolor_setdim",
+      "title": {
+        "en": "Set brightness"
+      },
+      "titleFormatted": {
+        "en": "Set brightness to [[dim]]"
+      },
+      "args": [
+        {
+          "type": "range",
+          "name": "dim",
+          "title": {
+            "en": "Brightness"
+          },
+          "min": 0,
+          "max": 100,
+          "Step": 1,
+          "label": "%"
+        }
+      ]
+    },
+    {
+      "id": "wfcolor_setcolor",
+      "title": {
+        "en": "Set color scene."
+      },
+      "titleFormatted": {
+        "en": "Set color scene [[colorscene]]."
+      },
+      "args": [
+        {
+          "name": "colorscene",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "2700K"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Ocean"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Romance"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Sunset"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Party"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Fireplace"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Cozy"
+              }
+            },
+            {
+              "id": "7",
+              "label": {
+                "en": "Forest"
+              }
+            },
+            {
+              "id": "8",
+              "label": {
+                "en": "Pastel Colors"
+              }
+            },
+            {
+              "id": "9",
+              "label": {
+                "en": "Wakeup"
+              }
+            },
+            {
+              "id": "10",
+              "label": {
+                "en": "Bedtime"
+              }
+            },
+            {
+              "id": "11",
+              "label": {
+                "en": "Warm white"
+              }
+            },
+            {
+              "id": "12",
+              "label": {
+                "en": "Daylight"
+              }
+            },
+            {
+              "id": "13",
+              "label": {
+                "en": "Coolwhite"
+              }
+            },
+            {
+              "id": "14",
+              "label": {
+                "en": "Nightlight"
+              }
+            },
+            {
+              "id": "15",
+              "label": {
+                "en": "Focus"
+              }
+            },
+            {
+              "id": "16",
+              "label": {
+                "en": "Relax"
+              }
+            },
+            {
+              "id": "17",
+              "label": {
+                "en": "True colors"
+              }
+            },
+            {
+              "id": "18",
+              "label": {
+                "en": "TV-time"
+              }
+            },
+            {
+              "id": "19",
+              "label": {
+                "en": "Plantgrowth"
+              }
+            },
+            {
+              "id": "20",
+              "label": {
+                "en": "Spring"
+              }
+            },
+            {
+              "id": "21",
+              "label": {
+                "en": "Summer"
+              }
+            },
+            {
+              "id": "22",
+              "label": {
+                "en": "Fall"
+              }
+            },
+            {
+              "id": "23",
+              "label": {
+                "en": "Deepdive"
+              }
+            },
+            {
+              "id": "24",
+              "label": {
+                "en": "Jungle"
+              }
+            },
+            {
+              "id": "25",
+              "label": {
+                "en": "Mojito"
+              }
+            },
+            {
+              "id": "26",
+              "label": {
+                "en": "Club"
+              }
+            },
+            {
+              "id": "27",
+              "label": {
+                "en": "Christmas"
+              }
+            },
+            {
+              "id": "28",
+              "label": {
+                "en": "Halloween"
+              }
+            },
+            {
+              "id": "29",
+              "label": {
+                "en": "Candlelight"
+              }
+            },
+            {
+              "id": "30",
+              "label": {
+                "en": "Golden white"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Settings"
+    },
+    "children": [
+      {
+        "id": "ip",
+        "type": "text",
+        "label": {
+          "en": "IP address"
+        },
+        "hint": "Device IP adress"
+      },
+      {
+        "id": "mac",
+        "type": "text",
+        "label": {
+          "en": "MAC address"
+        },
+        "hint": "Device mac adress"
+      }
+    ]
+  }
+]

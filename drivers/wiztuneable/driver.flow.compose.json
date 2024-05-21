@@ -1,0 +1,135 @@
+{
+  "conditions": [
+    {
+      "id": "wtune_onoff",
+      "title": {
+        "en": "The device !{{is|isn't}} on"
+      },
+      "titleFormatted": {
+        "en": "The device !{{is|isn't}} on"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "wtune_setdim",
+      "title": {
+        "en": "Set brightness"
+      },
+      "titleFormatted": {
+        "en": "Set brightness to [[dim]]"
+      },
+      "args": [
+        {
+          "type": "range",
+          "name": "dim",
+          "title": {
+            "en": "Brightness"
+          },
+          "min": 0,
+          "max": 100,
+          "Step": 1,
+          "label": "%"
+        }
+      ]
+    },
+    {
+      "id": "wtune_setscene",
+      "title": {
+        "en": "Set white color scene."
+      },
+      "titleFormatted": {
+        "en": "Set white color scene [[scene]]."
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "scene",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "2700K"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Cozy"
+              }
+            },
+            {
+              "id": "11",
+              "label": {
+                "en": "Warm white"
+              }
+            },
+            {
+              "id": "12",
+              "label": {
+                "en": "Daylight"
+              }
+            },
+            {
+              "id": "13",
+              "label": {
+                "en": "Coolwhite"
+              }
+            },
+            {
+              "id": "14",
+              "label": {
+                "en": "Nightlight"
+              }
+            },
+            {
+              "id": "15",
+              "label": {
+                "en": "Focus"
+              }
+            },
+            {
+              "id": "16",
+              "label": {
+                "en": "Relax"
+              }
+            },
+            {
+              "id": "18",
+              "label": {
+                "en": "TV-time"
+              }
+            },
+            {
+              "id": "30",
+              "label": {
+                "en": "Golden white"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wtune_setkelvin",
+      "title": {
+        "en": "Adjust white tone."
+      },
+      "titleFormatted": {
+        "en": "Set kelvin to [[ktemp]]"
+      },
+      "args": [
+        {
+          "type": "range",
+          "name": "ktemp",
+          "title": {
+            "en": "Kelvin"
+          },
+          "min": 2100,
+          "max": 6000,
+          "step": 1
+        }
+      ]
+    }
+  ]
+}
