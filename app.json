@@ -1,0 +1,1545 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "no.jib.WizWifi",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "WizWifi"
+  },
+  "description": {
+    "en": "This is a remake of the WizBulbs app. The new app uses a different type of device detection and basically supports most types of light bulbs, spotlights, led strips, ceiling lamps and smart plugs from Wiz Connected. See the website (link below) for more information.",
+    "nl": "Dit is een remake van de WizBulbs-app. De nieuwe app gebruikt een ander type apparaatdetectie en ondersteunt in principe de meeste soorten gloeilampen, schijnwerpers, ledstrips, plafondlampen en slimme stekkers van Wiz Connected. Zie de website (link hieronder) voor meer informatie.",
+    "de": "Dies ist ein Remake der WizBulbs-App. Die neue App verwendet eine andere Art der Geräteerkennung und unterstützt grundsätzlich die meisten Arten von Glühbirnen, Strahlern, LED-Streifen, Deckenlampen und Smart Plugs von Wiz Connected. Weitere Informationen finden Sie auf der Website (Link unten).",
+    "fr": "Il s'agit d'un remake de l'application WizBulbs. La nouvelle application utilise un type de détection d'appareil différent et prend essentiellement en charge la plupart des types d'ampoules, de projecteurs, de bandes LED, de plafonniers et de prises intelligentes de Wiz Connected. Voir le site Web (lien ci-dessous) pour plus d'informations.",
+    "it": "Questo è un remake dell'app WizBulbs. La nuova app utilizza un diverso tipo di rilevamento del dispositivo e supporta sostanzialmente la maggior parte dei tipi di lampadine, faretti, strisce led, plafoniere e prese intelligenti di Wiz Connected. Vedere il sito Web (link sotto) per ulteriori informazioni.",
+    "sv": "Detta är en remake av WizBulbs-appen. Den nya appen använder en annan typ av enhetsdetektering och stöder i princip de flesta typer av glödlampor, spotlights, led-strips, taklampor och smarta pluggar från Wiz Connected. Se hemsidan (länk nedan) för mer information.",
+    "no": "Dette er en remake av WizBulbs appen. Den nye appen benytter en annen type detektering av devices og supporterer i utgangspunktet de fleste typer lyspærer, spotlights, led lenker, plafond lamps og smartplugger fra Wiz Connected. Se hjemmesiden (link under) for mer informasjon.",
+    "es": "Esta es una nueva versión de la aplicación WizBulbs. La nueva aplicación utiliza un tipo diferente de detección de dispositivos y básicamente es compatible con la mayoría de los tipos de bombillas, focos, tiras LED, lámparas de techo y enchufes inteligentes de Wiz Connected. Consulte el sitio web (enlace a continuación) para obtener más información.",
+    "da": "Dette er en remake af WizBulbs-appen. Den nye app bruger en anden type enhedsdetektering og understøtter stort set de fleste typer pærer, spotlights, led strips, loftslamper og smarte stik fra Wiz Connected. Se hjemmesiden (link nedenfor) for mere information."
+  },
+  "category": [
+    "lights"
+  ],
+  "permissions": [],
+  "brandColor": "#007acc",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Jan-Ivar Bøyum",
+    "email": "jan-ivar@boyum.priv.no"
+  },
+  "homepage": "https://www.boyum.priv.no/wizlocal",
+  "bugs": {
+    "url": "https://github.com/boeyum/no.jib.WizLocal/issues"
+  },
+  "source": "https://github.com/boeyum/no.jib.WizLocal",
+  "flow": {
+    "conditions": [
+      {
+        "id": "wfcolor_onoff",
+        "title": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "titleFormatted": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizcolor"
+          }
+        ]
+      },
+      {
+        "id": "dim_onoff",
+        "title": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "titleFormatted": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizdimmable"
+          }
+        ]
+      },
+      {
+        "id": "pplug_onoff",
+        "title": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "titleFormatted": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizpowersocket"
+          }
+        ]
+      },
+      {
+        "id": "pplug_power",
+        "title": {
+          "en": "Watt"
+        },
+        "titleFormatted": {
+          "en": "Watt exceeds [[nwatt]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizpowersocket"
+          },
+          {
+            "type": "number",
+            "name": "nwatt",
+            "min": 0,
+            "max": 2300,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "splug_onoff",
+        "title": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "titleFormatted": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizsocket"
+          }
+        ]
+      },
+      {
+        "id": "wtune_onoff",
+        "title": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "titleFormatted": {
+          "en": "The device !{{is|isn't}} on"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wiztuneable"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "wfcolor_setdim",
+        "title": {
+          "en": "Set brightness"
+        },
+        "titleFormatted": {
+          "en": "Set brightness to [[dim]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizcolor"
+          },
+          {
+            "type": "range",
+            "name": "dim",
+            "title": {
+              "en": "Brightness"
+            },
+            "min": 0,
+            "max": 100,
+            "Step": 1,
+            "label": "%"
+          }
+        ]
+      },
+      {
+        "id": "wfcolor_setcolor",
+        "title": {
+          "en": "Set color scene."
+        },
+        "titleFormatted": {
+          "en": "Set color scene [[colorscene]]."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizcolor"
+          },
+          {
+            "name": "colorscene",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "2700K"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Ocean"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Romance"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Sunset"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Party"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Fireplace"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Cozy"
+                }
+              },
+              {
+                "id": "7",
+                "label": {
+                  "en": "Forest"
+                }
+              },
+              {
+                "id": "8",
+                "label": {
+                  "en": "Pastel Colors"
+                }
+              },
+              {
+                "id": "9",
+                "label": {
+                  "en": "Wakeup"
+                }
+              },
+              {
+                "id": "10",
+                "label": {
+                  "en": "Bedtime"
+                }
+              },
+              {
+                "id": "11",
+                "label": {
+                  "en": "Warm white"
+                }
+              },
+              {
+                "id": "12",
+                "label": {
+                  "en": "Daylight"
+                }
+              },
+              {
+                "id": "13",
+                "label": {
+                  "en": "Coolwhite"
+                }
+              },
+              {
+                "id": "14",
+                "label": {
+                  "en": "Nightlight"
+                }
+              },
+              {
+                "id": "15",
+                "label": {
+                  "en": "Focus"
+                }
+              },
+              {
+                "id": "16",
+                "label": {
+                  "en": "Relax"
+                }
+              },
+              {
+                "id": "17",
+                "label": {
+                  "en": "True colors"
+                }
+              },
+              {
+                "id": "18",
+                "label": {
+                  "en": "TV-time"
+                }
+              },
+              {
+                "id": "19",
+                "label": {
+                  "en": "Plantgrowth"
+                }
+              },
+              {
+                "id": "20",
+                "label": {
+                  "en": "Spring"
+                }
+              },
+              {
+                "id": "21",
+                "label": {
+                  "en": "Summer"
+                }
+              },
+              {
+                "id": "22",
+                "label": {
+                  "en": "Fall"
+                }
+              },
+              {
+                "id": "23",
+                "label": {
+                  "en": "Deepdive"
+                }
+              },
+              {
+                "id": "24",
+                "label": {
+                  "en": "Jungle"
+                }
+              },
+              {
+                "id": "25",
+                "label": {
+                  "en": "Mojito"
+                }
+              },
+              {
+                "id": "26",
+                "label": {
+                  "en": "Club"
+                }
+              },
+              {
+                "id": "27",
+                "label": {
+                  "en": "Christmas"
+                }
+              },
+              {
+                "id": "28",
+                "label": {
+                  "en": "Halloween"
+                }
+              },
+              {
+                "id": "29",
+                "label": {
+                  "en": "Candlelight"
+                }
+              },
+              {
+                "id": "30",
+                "label": {
+                  "en": "Golden white"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "wdim_setdim",
+        "title": {
+          "en": "Set brightness"
+        },
+        "titleFormatted": {
+          "en": "Set brightness to [[dim]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wizdimmable"
+          },
+          {
+            "type": "range",
+            "name": "dim",
+            "title": {
+              "en": "Brightness"
+            },
+            "min": 0,
+            "max": 100,
+            "Step": 1,
+            "label": "%"
+          }
+        ]
+      },
+      {
+        "id": "wtune_setdim",
+        "title": {
+          "en": "Set brightness"
+        },
+        "titleFormatted": {
+          "en": "Set brightness to [[dim]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wiztuneable"
+          },
+          {
+            "type": "range",
+            "name": "dim",
+            "title": {
+              "en": "Brightness"
+            },
+            "min": 0,
+            "max": 100,
+            "Step": 1,
+            "label": "%"
+          }
+        ]
+      },
+      {
+        "id": "wtune_setscene",
+        "title": {
+          "en": "Set white color scene."
+        },
+        "titleFormatted": {
+          "en": "Set white color scene [[scene]]."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wiztuneable"
+          },
+          {
+            "type": "dropdown",
+            "name": "scene",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "2700K"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Cozy"
+                }
+              },
+              {
+                "id": "11",
+                "label": {
+                  "en": "Warm white"
+                }
+              },
+              {
+                "id": "12",
+                "label": {
+                  "en": "Daylight"
+                }
+              },
+              {
+                "id": "13",
+                "label": {
+                  "en": "Coolwhite"
+                }
+              },
+              {
+                "id": "14",
+                "label": {
+                  "en": "Nightlight"
+                }
+              },
+              {
+                "id": "15",
+                "label": {
+                  "en": "Focus"
+                }
+              },
+              {
+                "id": "16",
+                "label": {
+                  "en": "Relax"
+                }
+              },
+              {
+                "id": "18",
+                "label": {
+                  "en": "TV-time"
+                }
+              },
+              {
+                "id": "30",
+                "label": {
+                  "en": "Golden white"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "wtune_setkelvin",
+        "title": {
+          "en": "Adjust white tone."
+        },
+        "titleFormatted": {
+          "en": "Set kelvin to [[ktemp]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=wiztuneable"
+          },
+          {
+            "type": "range",
+            "name": "ktemp",
+            "title": {
+              "en": "Kelvin"
+            },
+            "min": 2100,
+            "max": 6000,
+            "step": 1
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "WizColor"
+      },
+      "class": "light",
+      "capabilities": [
+        "wiz_colorscene",
+        "light_saturation",
+        "light_temperature",
+        "light_mode",
+        "light_hue",
+        "dim",
+        "onoff"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "enter_ip"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/wizcolor/assets/images/small.png",
+        "large": "/drivers/wizcolor/assets/images/large.png",
+        "xlarge": "/drivers/wizcolor/assets/images/xlarge.png"
+      },
+      "id": "wizcolor",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP address"
+              },
+              "hint": "Device IP adress"
+            },
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC address"
+              },
+              "hint": "Device mac adress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "WizDimmable"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "enter_ip"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/wizdimmable/assets/images/small.png",
+        "large": "/drivers/wizdimmable/assets/images/large.png",
+        "xlarge": "/drivers/wizdimmable/assets/images/xlarge.png"
+      },
+      "id": "wizdimmable",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP address"
+              },
+              "hint": "Device IP adress"
+            },
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC address"
+              },
+              "hint": "Device mac adress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "WizPowerSocket"
+      },
+      "class": "socket",
+      "capabilities": [
+        "measure_power",
+        "onoff"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "min": 0,
+          "max": 2300,
+          "step": 1
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "enter_ip"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/wizpowersocket/assets/images/small.png",
+        "large": "/drivers/wizpowersocket/assets/images/large.png",
+        "xlarge": "/drivers/wizpowersocket/assets/images/xlarge.png"
+      },
+      "id": "wizpowersocket",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP address"
+              },
+              "hint": "Device IP adress"
+            },
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC address"
+              },
+              "hint": "Device mac adress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "WizSocket"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "enter_ip"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/wizsocket/assets/images/small.png",
+        "large": "/drivers/wizsocket/assets/images/large.png",
+        "xlarge": "/drivers/wizsocket/assets/images/xlarge.png"
+      },
+      "id": "wizsocket",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP address"
+              },
+              "hint": "Device IP adress"
+            },
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC address"
+              },
+              "hint": "Device mac adress"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "WizTuneable"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "wiz_kelvin",
+        "wiz_scene"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "min": 0,
+          "max": 100,
+          "step": 1
+        },
+        "wiz_kelvin": {
+          "min": 2100,
+          "max": 6000,
+          "step": 10
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "pair": [
+        {
+          "id": "enter_ip"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/wiztuneable/assets/images/small.png",
+        "large": "/drivers/wiztuneable/assets/images/large.png",
+        "xlarge": "/drivers/wiztuneable/assets/images/xlarge.png"
+      },
+      "id": "wiztuneable",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings"
+          },
+          "children": [
+            {
+              "id": "ip",
+              "type": "text",
+              "label": {
+                "en": "IP address"
+              },
+              "hint": "Device IP adress"
+            },
+            {
+              "id": "mac",
+              "type": "text",
+              "label": {
+                "en": "MAC address"
+              },
+              "hint": "Device mac adress"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "wiz_colorscene": {
+      "type": "enum",
+      "title": {
+        "en": "Light scene selector",
+        "nl": "Lichtscène-selector",
+        "de": "Licht Szenenauswahl",
+        "fr": "Sélecteur de scène lumineuse",
+        "it": "Selettore di scene luminose",
+        "sv": "Ljus scenväljare",
+        "no": "Lys scene velger",
+        "es": "Selector de escenas de luz",
+        "da": "Lys scene-vælger"
+      },
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Normal bulb (2700K)",
+            "nl": "Normale lamp (2700K)",
+            "de": "Normale Glühbirne (2700K)",
+            "fr": "Ampoule normale (2700K)",
+            "it": "Lampadina normale (2700K)",
+            "sv": "Normal glödlampa (2700K)",
+            "no": "Normalpære (2700K)",
+            "es": "Bombilla normal (2700K)",
+            "da": "Normal pære (2700K)"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "Ocean",
+            "nl": "Oceaan",
+            "de": "Ozean",
+            "fr": "Océan",
+            "it": "Oceano",
+            "sv": "Hav",
+            "no": "Hav",
+            "es": "Oceano",
+            "da": "Hav"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Romance",
+            "nl": "Romantiek",
+            "de": "Romantik",
+            "fr": "Romance",
+            "it": "Romanza",
+            "sv": "Romantik",
+            "no": "Romanse",
+            "es": "Romance",
+            "da": "Romantik"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Sunset",
+            "nl": "Zonsondergang",
+            "de": "Sonnenuntergang",
+            "fr": "Le coucher du soleil",
+            "it": "Tramonto",
+            "sv": "Solnedgång",
+            "no": "Solnedgang",
+            "es": "Puesta de sol",
+            "da": "Solnedgang"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Party",
+            "nl": "Feestje",
+            "de": "Party",
+            "fr": "Fête",
+            "it": "Festa",
+            "sv": "Fest",
+            "no": "Fest",
+            "es": "Fiesta",
+            "da": "Fest"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Fireplace",
+            "nl": "Open haard",
+            "de": "Kamin",
+            "fr": "Cheminée",
+            "it": "Camino",
+            "sv": "Öppen spis",
+            "no": "Peis",
+            "es": "Chimenea",
+            "da": "Ildsted"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "Cozy",
+            "nl": "Leuk",
+            "de": "Nett",
+            "fr": "Joli",
+            "it": "Bello",
+            "sv": "Trevlig",
+            "no": "Hyggelig",
+            "es": "Lindo",
+            "da": "Hyggelig"
+          }
+        },
+        {
+          "id": "7",
+          "title": {
+            "en": "Forest",
+            "nl": "Woud",
+            "de": "Wald",
+            "fr": "Forêt",
+            "it": "Foresta",
+            "sv": "Skog",
+            "no": "Skog",
+            "es": "Bosque",
+            "da": "Skov"
+          }
+        },
+        {
+          "id": "8",
+          "title": {
+            "en": "Pastel Colors",
+            "nl": "Pastelkleuren",
+            "de": "Pastellfarben",
+            "fr": "Couleurs pastel",
+            "it": "Colori pastello",
+            "sv": "Pastell färger",
+            "no": "Pastell farger",
+            "es": "Colores pastel",
+            "da": "Pastelfarver"
+          }
+        },
+        {
+          "id": "9",
+          "title": {
+            "en": "Wakeup",
+            "nl": "Wakker worden",
+            "de": "Aufwachen",
+            "fr": "Se réveiller",
+            "it": "Svegliati",
+            "sv": "Vakna",
+            "no": "Våkn opp",
+            "es": "Despierta",
+            "da": "Vågn op"
+          }
+        },
+        {
+          "id": "10",
+          "title": {
+            "en": "Bedtime",
+            "nl": "Bedtijd",
+            "de": "Bettzeit",
+            "fr": "Heure du coucher",
+            "it": "Ora di andare a dormire",
+            "sv": "Läggdags",
+            "no": "Sengetid",
+            "es": "Hora de acostarse",
+            "da": "Sengetid"
+          }
+        },
+        {
+          "id": "11",
+          "title": {
+            "en": "Warm white",
+            "nl": "Warm wit",
+            "de": "Warmweiß",
+            "fr": "Blanc chaud",
+            "it": "Bianco caldo",
+            "sv": "Varm vit",
+            "no": "Varm hvit",
+            "es": "Blanco cálido",
+            "da": "Varm hvid"
+          }
+        },
+        {
+          "id": "12",
+          "title": {
+            "en": "Daylight",
+            "nl": "Daglicht",
+            "de": "Tageslicht",
+            "fr": "Lumière du jour",
+            "it": "Luce diurna",
+            "sv": "Dagsljus",
+            "no": "Dagslys",
+            "es": "Luz",
+            "da": "Dagslys"
+          }
+        },
+        {
+          "id": "13",
+          "title": {
+            "en": "Coolwhite",
+            "nl": "Koel wit",
+            "de": "Kaltes Weiß",
+            "fr": "Coolwhite",
+            "it": "Bianco freddo",
+            "sv": "Kall vit",
+            "no": "Kaldhvit",
+            "es": "Blanco frío",
+            "da": "Coolwhite"
+          }
+        },
+        {
+          "id": "14",
+          "title": {
+            "en": "Nightlight",
+            "nl": "Nachtlichtje",
+            "de": "Nachtlicht",
+            "fr": "Veilleuse",
+            "it": "Luce notturna",
+            "sv": "Nattlampa",
+            "no": "Nattlys",
+            "es": "Luz de noche",
+            "da": "Nattelys"
+          }
+        },
+        {
+          "id": "15",
+          "title": {
+            "en": "Focus",
+            "nl": "Focus",
+            "de": "Fokus",
+            "fr": "Concentrer",
+            "it": "Messa a fuoco",
+            "sv": "Fokus",
+            "no": "Fokus",
+            "es": "Atención",
+            "da": "Fokus"
+          }
+        },
+        {
+          "id": "16",
+          "title": {
+            "en": "Relax",
+            "nl": "Kom tot rust",
+            "de": "Entspannen",
+            "fr": "Relaxer",
+            "it": "Rilassare",
+            "sv": "Koppla av",
+            "no": "Avslappet",
+            "es": "Relajarse",
+            "da": "Afslappet"
+          }
+        },
+        {
+          "id": "17",
+          "title": {
+            "en": "True colors",
+            "nl": "Ware kleuren",
+            "de": "Echte Farben",
+            "fr": "Vraies couleurs",
+            "it": "Colori veri",
+            "sv": "Sanna färger",
+            "no": "Ekte farger",
+            "es": "Colores verdaderos",
+            "da": "Sande farver"
+          }
+        },
+        {
+          "id": "18",
+          "title": {
+            "en": "TV-time",
+            "nl": "TV-tijd",
+            "de": "Fernsehzeit",
+            "fr": "Temps de télévision",
+            "it": "TV-time",
+            "sv": "TV-tid",
+            "no": "TV-tid",
+            "es": "Tiempo de televisión",
+            "da": "TV-tid"
+          }
+        },
+        {
+          "id": "19",
+          "title": {
+            "en": "Plantgrowth",
+            "nl": "Plantengroei",
+            "de": "Pflanzenwachstum",
+            "fr": "Croissance des plantes",
+            "it": "Crescita delle piante",
+            "sv": "Planttillväxt",
+            "no": "Plante vekst",
+            "es": "Crecimiento de la planta",
+            "da": "Plantevækst"
+          }
+        },
+        {
+          "id": "20",
+          "title": {
+            "en": "Spring",
+            "nl": "Voorjaar",
+            "de": "Frühling",
+            "fr": "Printemps",
+            "it": "Primavera",
+            "sv": "Vår",
+            "no": "Vår",
+            "es": "Primavera",
+            "da": "Vår"
+          }
+        },
+        {
+          "id": "21",
+          "title": {
+            "en": "Summer",
+            "nl": "Zomer",
+            "de": "Sommer",
+            "fr": "Été",
+            "it": "Estate",
+            "sv": "Sommar",
+            "no": "Sommer",
+            "es": "El verano",
+            "da": "Sommer"
+          }
+        },
+        {
+          "id": "22",
+          "title": {
+            "en": "Fall",
+            "nl": "Herfst",
+            "de": "Herbst",
+            "fr": "L'automne",
+            "it": "Autunno",
+            "sv": "Höst",
+            "no": "Høst",
+            "es": "Otoño",
+            "da": "Høst"
+          }
+        },
+        {
+          "id": "23",
+          "title": {
+            "en": "Deepdive",
+            "nl": "Diepe duik",
+            "de": "Tieftauchgang",
+            "fr": "Plongée profonde",
+            "it": "Profonda immersione",
+            "sv": "Djupdykning",
+            "no": "Dypdykk",
+            "es": "Bucear profundo",
+            "da": "Dybdykning"
+          }
+        },
+        {
+          "id": "24",
+          "title": {
+            "en": "Jungle",
+            "nl": "Jungle",
+            "de": "Dschungel",
+            "fr": "Jungle",
+            "it": "Giungla",
+            "sv": "Djungel",
+            "no": "Jungel",
+            "es": "Selva",
+            "da": "Jungle"
+          }
+        },
+        {
+          "id": "25",
+          "title": {
+            "en": "Mojito",
+            "nl": "Mojito",
+            "de": "Mojito",
+            "fr": "Mojito",
+            "it": "Mojito",
+            "sv": "Mojito",
+            "no": "Mojito",
+            "es": "Mojito",
+            "da": "Mojito"
+          }
+        },
+        {
+          "id": "26",
+          "title": {
+            "en": "Club",
+            "nl": "Club",
+            "de": "Club",
+            "fr": "Club",
+            "it": "Club",
+            "sv": "Club",
+            "no": "Club",
+            "es": "Club",
+            "da": "Club"
+          }
+        },
+        {
+          "id": "27",
+          "title": {
+            "en": "Christmas",
+            "nl": "Kerstmis-",
+            "de": "Weihnachten",
+            "fr": "Noël",
+            "it": "Natale",
+            "sv": "Jul",
+            "no": "Jul",
+            "es": "Navidad",
+            "da": "Jul"
+          }
+        },
+        {
+          "id": "28",
+          "title": {
+            "en": "Halloween",
+            "nl": "Halloween",
+            "de": "Halloween",
+            "fr": "Halloween",
+            "it": "Halloween",
+            "sv": "Halloween",
+            "no": "Halloween",
+            "es": "Halloween",
+            "da": "Halloween"
+          }
+        },
+        {
+          "id": "29",
+          "title": {
+            "en": "Candlelight",
+            "nl": "Kaarslicht",
+            "de": "Kerzenlicht",
+            "fr": "Aux chandelles",
+            "it": "Lume di candela",
+            "sv": "Levande ljus",
+            "no": "Stearinlys",
+            "es": "Luz de una vela",
+            "da": "Stearinlys"
+          }
+        },
+        {
+          "id": "30",
+          "title": {
+            "en": "Golden white",
+            "nl": "Goud wit",
+            "de": "Goldenes Weiß",
+            "fr": "Blanc doré",
+            "it": "Bianco dorato",
+            "sv": "Gyllene vit",
+            "no": "Gullhvit",
+            "es": "Blanco dorado",
+            "da": "Gylden hvid"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    },
+    "wiz_kelvin": {
+      "type": "number",
+      "title": {
+        "en": "Light color (kelvin)",
+        "nl": "Lichtkleur (kelvin)",
+        "de": "Helle Farbe (Kelvin)",
+        "fr": "Couleur de la lumière (kelvin)",
+        "it": "Colore chiaro (kelvin)",
+        "sv": "Ljus färg (kelvin)",
+        "no": "Lys farge (kelvin)",
+        "es": "Color claro (kelvin)",
+        "da": "Lys farve (kelvin)"
+      },
+      "min": 2100,
+      "max": 6000,
+      "decimals": 2,
+      "units": "K",
+      "getable": true,
+      "setable": true,
+      "uiComponent": "slider"
+    },
+    "wiz_scene": {
+      "type": "enum",
+      "title": {
+        "en": "Light scene selector",
+        "nl": "Lichtscène-selector",
+        "de": "Licht Szenenauswahl",
+        "fr": "Sélecteur de scène lumineuse",
+        "it": "Selettore di scene luminose",
+        "sv": "Ljus scenväljare",
+        "no": "Lys scene velger",
+        "es": "Selector de escenas de luz",
+        "da": "Lys scene-vælger"
+      },
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "Normal bulb (2700K)",
+            "nl": "Normale lamp (2700K)",
+            "de": "Normale Glühbirne (2700K)",
+            "fr": "Ampoule normale (2700K)",
+            "it": "Lampadina normale (2700K)",
+            "sv": "Normal glödlampa (2700K)",
+            "no": "Normalpære (2700K)",
+            "es": "Bombilla normal (2700K)",
+            "da": "Normal pære (2700K)"
+          }
+        },
+        {
+          "id": "11",
+          "title": {
+            "en": "Warm white",
+            "nl": "Warm wit",
+            "de": "Warmweiß",
+            "fr": "Blanc chaud",
+            "it": "Bianco caldo",
+            "sv": "Varm vit",
+            "no": "Varm hvit",
+            "es": "Blanco cálido",
+            "da": "Varm hvid"
+          }
+        },
+        {
+          "id": "12",
+          "title": {
+            "en": "Daylight",
+            "nl": "Daglicht",
+            "de": "Tageslicht",
+            "fr": "Lumière du jour",
+            "it": "Luce diurna",
+            "sv": "Dagsljus",
+            "no": "Dagslys",
+            "es": "Luz",
+            "da": "Dagslys"
+          }
+        },
+        {
+          "id": "13",
+          "title": {
+            "en": "Coolwhite",
+            "nl": "Koel wit",
+            "de": "Kaltes Weiß",
+            "fr": "Coolwhite",
+            "it": "Bianco freddo",
+            "sv": "Kall vit",
+            "no": "Kaldhvit",
+            "es": "Blanco frío",
+            "da": "Coolwhite"
+          }
+        },
+        {
+          "id": "14",
+          "title": {
+            "en": "Nightlight",
+            "nl": "Nachtlichtje",
+            "de": "Nachtlicht",
+            "fr": "Veilleuse",
+            "it": "Luce notturna",
+            "sv": "Nattlampa",
+            "no": "Nattlys",
+            "es": "Luz de noche",
+            "da": "Nattelys"
+          }
+        },
+        {
+          "id": "6",
+          "title": {
+            "en": "Cozy",
+            "nl": "Leuk",
+            "de": "Nett",
+            "fr": "Joli",
+            "it": "Bello",
+            "sv": "Trevlig",
+            "no": "Hyggelig",
+            "es": "Lindo",
+            "da": "Hyggelig"
+          }
+        },
+        {
+          "id": "16",
+          "title": {
+            "en": "Relax",
+            "nl": "Kom tot rust",
+            "de": "Entspannen",
+            "fr": "Relaxer",
+            "it": "Rilassare",
+            "sv": "Koppla av",
+            "no": "Avslappet",
+            "es": "Relajarse",
+            "da": "Afslappet"
+          }
+        },
+        {
+          "id": "15",
+          "title": {
+            "en": "Focus",
+            "nl": "Focus",
+            "de": "Fokus",
+            "fr": "Concentrer",
+            "it": "Messa a fuoco",
+            "sv": "Fokus",
+            "no": "Fokus",
+            "es": "Atención",
+            "da": "Fokus"
+          }
+        },
+        {
+          "id": "18",
+          "title": {
+            "en": "TV-time",
+            "nl": "TV-tijd",
+            "de": "Fernsehzeit",
+            "fr": "Temps de télévision",
+            "it": "TV-time",
+            "sv": "TV-tid",
+            "no": "TV-tid",
+            "es": "Tiempo de televisión",
+            "da": "TV-tid"
+          }
+        },
+        {
+          "id": "30",
+          "title": {
+            "en": "Golden white",
+            "nl": "Goud wit",
+            "de": "Goldenes Weiß",
+            "fr": "Blanc doré",
+            "it": "Bianco dorato",
+            "sv": "Gyllene vit",
+            "no": "Gullhvit",
+            "es": "Blanco dorado",
+            "da": "Gylden hvid"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    }
+  }
+}
