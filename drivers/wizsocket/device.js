@@ -73,9 +73,6 @@ class WizSocketDevice extends Device {
   }
 
   // FLOW functions
-  async flowOnOff() {
-      return devices.getState(this.ipAddr);
-  }
 
   // HELPER FUNCTIONS
   pollDevice(id, device) {

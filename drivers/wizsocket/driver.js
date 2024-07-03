@@ -12,10 +12,6 @@ class WizSocketDriver extends Driver {
    * onInit is called when the driver is initialized.
    */
   async onInit() {
-      const splugCard = this.homey.flow.getConditionCard('splug_onoff');
-      splugCard.registerRunListener(async ({ device, message }) => {
-          await device.flowOnOff(message);
-      });
   }
 
   async onPair(session) {
