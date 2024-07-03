@@ -97,7 +97,7 @@ This app is experimental and may therefore contain errors and omissions. The app
 
 **1.0.3** Local Version (bug fix)
 
-**1.0.3** Local Version (bug fix)
+**1.0.4** Local Version (bug fix)
 
 **1.0.5** First official release version of the app after testing. 
 
