@@ -1,6 +1,6 @@
 'use strict';
 
-const { Driver } = require('homey');
+const { Driver, Device } = require('homey');
 const check = require('../../lib/WizConnect');
 const konst = require('../../lib/constants');
 
@@ -12,26 +12,21 @@ class WizTuneableDriver extends Driver {
    * onInit is called when the driver is initialized.
    */
     async onInit() {
-        const wtlugCard = this.homey.flow.getConditionCard('wtune_onoff');
-        wtlugCard.registerRunListener(async ({ device, message }) => {
-            await device.flowOnOff(message);
-        });
-
         const showTuneableActionCard = this.homey.flow.getActionCard('wtune_setdim');
-        showTuneableActionCard.registerRunListener(async ({ device, message }) => {
-            await device.createDimming(message);
+        showTuneableActionCard.registerRunListener((args, state) => {
+            return (args.device.createDimming(args, state));
         });
 
         const showKelvinActionCard = this.homey.flow.getActionCard('wtune_setkelvin');
-        showKelvinActionCard.registerRunListener(async ({ device, message }) => {
-            await device.createKelvin(message);
-        });
+        showKelvinActionCard.registerRunListener((args, state) => {
+            return (args.device.createKelvin(args, state));
+        }); 
 
         const showWCActionCard = this.homey.flow.getActionCard('wtune_setscene');
-        showWCActionCard.registerRunListener(async ({ device, message }) => {
-            await device.createWhiteC(message);
+        showWCActionCard.registerRunListener((args, state) => {
+            return (args.device.createWhiteC(args, state));
         });
-    }
+   }
 
 
     async onPair(session) {

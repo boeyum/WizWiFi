@@ -120,23 +120,23 @@ class WizTuneableDevice extends Device {
   }
 
   // FLOW functions
-  async flowOnOff() {
-      return devices.getState(ipAddr);
+
+  async createDimming(args, state) {
+      if (args.hasOwnProperty('dim')) {
+          this.callDimming(args.dim);
+      }
   }
 
-  async createDimming(args) {
-      const { dim } = args;
-      devices.setBrightness(ipAddr, dim);
+  async createKelvin(args, state) {
+      if (args.hasOwnProperty('ktemp')) {
+          this.callLightTemp(args.ktemp);
+      }
   }
 
-  async createKelvin(args) {
-      const { ktemp } = args;
-      devices.setLightTemp(ipAddr, ktemp);
-  }
-
-  async createWhiteC(args) {
-      const { id } = args;
-      devices.onLightScene(ipAddr, id);
+  async createWhiteC(args, state) {
+      if (args.hasOwnProperty('scene')) {
+          this.callSetScene(args.scene);
+      }
   }
 
   // HELPER FUNCTIONS
@@ -155,6 +155,17 @@ class WizTuneableDevice extends Device {
       }, 600000);
   }
 
+    callDimming(dim) {
+        devices.setBrightness(ipAddr, dim);
+    }
+
+    callLightTemp(ktm) {
+        devices.setLightTemp(ipAddr, ktm);
+    }
+
+    callSetScene(sce) {
+        devices.setLightScene(ipAddr, sce);
+    }
 }
 
 module.exports = WizTuneableDevice;
