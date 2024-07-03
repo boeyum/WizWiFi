@@ -12,14 +12,9 @@ class WizPowerSocketDriver extends Driver {
      * onInit is called when the driver is initialized.
      */
     async onInit() {
-        const pplugCard = this.homey.flow.getConditionCard('pplug_onoff');
-        pplugCard.registerRunListener(async ({ device, message }) => {
-            await device.flowOnOff(message);
-        });
-
         const powerCard = this.homey.flow.getConditionCard('pplug_power');
-        powerCard.registerRunListener(async ({ device, message }) => {
-            await device.flowPower(message);
+        powerCard.registerRunListener((args, state) => {
+            return (args.device.createWhiteC(args, state));
         });
     }
 

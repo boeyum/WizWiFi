@@ -78,31 +78,33 @@ class WizPowerSocketDevice extends Device {
   }
 
   // FLOW functions
-  async flowOnOff() {
-      return devices.getState(this.ipAddr);
-  }
-
   async flowPower(message) {
-      this.power = devices.getPower(this.ipAddr);
-      if (this.power <= message) {
-          return true;
+      if (args.hasOwnProperty('nwatt')) {
+          return this.getPower(args.nwatt);
       }
       return false;
   }
 
   // HELPER FUNCTIONS
-    pollDevice(id, device) {
-        clearInterval(this.pollingInterval);
+  pollDevice(id, device) {
+      clearInterval(this.pollingInterval);
+      this.pollingInterval = setInterval(async () => {
+          var sstat = devices.getState(ipAddr);
+          this.setCapabilityValue('onoff', sstat);
+          var xpower = devices.getPower(ipAddr);
+          var tpower = Number(xpower);
+          var npower = Math.abs(tpower / 1000)
+          this.setCapabilityValue('measure_power', npower);
+      }, 60000);
+  }
 
-        this.pollingInterval = setInterval(async () => {
-            var sstat = devices.getState(ipAddr);
-            this.setCapabilityValue('onoff', sstat);
-            var xpower = devices.getPower(ipAddr);
-            var tpower = Number(xpower);
-            var npower = Math.abs(tpower / 1000)
-            this.setCapabilityValue('measure_power', npower);
-        }, 60000);
-    }
+  getPower(velk) {
+      this.power = devices.getPower(this.ipAddr);
+      if (this.power <= velk) {
+          return true;
+      }
+      return false;
+  }
 }
 
 module.exports = WizPowerSocketDevice;
