@@ -2,7 +2,6 @@
 
 const { Device } = require('homey');
 const tinycolor = require('tinycolor2');
-const tinygradient = require('tinygradient');
 const util = require('util');
 const Command = require('../../lib/WizCommand');
 
@@ -160,18 +159,17 @@ class WizColorDevice extends Device {
   }
 
   // FLOW functions
-  async flowOnOff() {
-      return devices.getState(this.ipAddr);
-  }
 
   async createDimming(args) {
-      const { dim } = args;
-      devices.setBrightness(ipAddr, dim);
+      if (args.hasOwnProperty('dim')) {
+          this.callDimming(args.dim);
+      }
   }
 
   async createColorScene(args) {
-      const { sid } = args;
-      devices.onLightScene(ipAddr, sid);
+      if (args.hasOwnProperty('colorscene')) {
+          this.callScene(args.colorscene);
+      }
   }
 
   // HELPER FUNCTIONS
@@ -197,6 +195,14 @@ class WizColorDevice extends Device {
           this.setCapabilityValue('light_hue', h / 360);
           this.setCapabilityValue('light_saturation', s / 100);
       }, 600000);
+  }
+
+  callDimming(dim) {
+      devices.setBrightness(ipAddr, dim);
+  }
+
+  callScene(sid) {
+      devices.setLightScene(ipAddr, sid);
   }
 
 }

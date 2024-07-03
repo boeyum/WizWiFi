@@ -8,23 +8,19 @@ let ipadr = "";
 
 class WizColorDriver extends Driver {
 
-    /**
+    /** 
      * onInit is called when the driver is initialized.
      */
     async onInit() {
-        const colooCard = this.homey.flow.getConditionCard('wfcolor_onoff');
-        colooCard.registerRunListener(async ({ device, message }) => {
-            await device.flowOnOff(message);
+
+        const showColScnActionCard = this.homey.flow.getActionCard('wfcolor_setdim');
+        showColScnActionCard.registerRunListener((args, state) => {
+             return (args.device.createDimming(args, state));
         });
 
-        const showColScnActionCard = this.homey.flow.getActionCard('wfcolor_setcolor');
-        showColScnActionCard.registerRunListener(async ({ device, message }) => {
-            await device.createColorScene(message);
-        });
-
-        const showColorActionCard = this.homey.flow.getActionCard('wfcolor_setdim');
-        showColorActionCard.registerRunListener(async ({ device, message }) => {
-            await device.createDimming(message);
+        const showColorActionCard = this.homey.flow.getActionCard('wfcolor_setcolor');
+        showColorActionCard.registerRunListener((args, state) => {
+            return (args.device.createColorScene(args, state));
         });
     }
 
