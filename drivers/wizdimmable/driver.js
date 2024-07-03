@@ -12,14 +12,10 @@ class WizDimmableDriver extends Driver {
      * onInit is called when the driver is initialized.
      */
     async onInit() {
-        const donoffCard = this.homey.flow.getConditionCard('dim_onoff');
-        donoffCard.registerRunListener(async ({ device, message }) => {
-            await device.flowOnOff(message);
-        });
-
         const showDimActionCard = this.homey.flow.getActionCard('wdim_setdim');
-        showDimActionCard.registerRunListener(async ({ device, message }) => {
-            await device.createDimming(message);
+        showDimActionCard.registerRunListener((args, state) => {
+            console.log(args);
+            return (args.device.createDimming(args, state));
         });
     }
 

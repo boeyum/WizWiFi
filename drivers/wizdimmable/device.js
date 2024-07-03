@@ -80,19 +80,13 @@ class WizDimmableDevice extends Device {
   }
 
   // FLOW functions
-  async flowOnOff() {
-      return devices.getState(this.ipAddr);
+
+  async createDimming(args, state) {
+      if (args.hasOwnProperty('dim')) {
+          this.callDimming(args.dim);
+      }
   }
 
-  async createDimming(args) {
-      const { dim } = args;
-      devices.setBrightness(ipAddr, dim);
-  }
-
-  async createColorScene(args) {
-      const { sid } = args;
-      devices.onLightScene(ipAddr, sid);
-  }
 
   // HELPER FUNCTIONS
   pollDevice(id, device) {
@@ -104,6 +98,11 @@ class WizDimmableDevice extends Device {
           dim = devices.getDimming(ipAddr);
           this.setCapabilityValue('dim', dim);
       }, 600000);
+  }
+
+    callDimming(dim) {
+      console.log(dim);
+      devices.setBrightness(ipAddr, dim);
   }
 }
 
