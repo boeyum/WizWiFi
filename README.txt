@@ -1,1 +1,4 @@
-Control Wiz Connected devices controlled inside the local network
+APP for Wiz Connected devices controlled inside the local network
+WizWiFi adds support for Wiz Connected devices such as light bulbs, lamps, LED strips and Power Sockets. 
+The devices' recognition is not based on the type of device, but on which functionality the device has (dimmable, white color adjustable, color etc.). Therefore, most light sources from Wiz should be supported. In addition, there is support for smart plugs with and without current measurement.
+WizWiFi is based entirely on local communication within your own local Wi-Fi network so that you avoid the additional vulnerability of a cloud service api.
