@@ -12,9 +12,9 @@ var isDimming = true;
 var isTemp = true;
 var isScenes = true;
 
-var stat = 0;
+var stat = false;
 var dim = 0;
-var scene = 0;
+var scene = null;
 var temp = 0;
 
 class WizTuneableDevice extends Device {
@@ -25,29 +25,30 @@ class WizTuneableDevice extends Device {
   async onInit() {
       id = this.getData('id');
       const settings = this.getSettings();
-      ipAddr = settings.ip;
-      macAddr = settings.mac;
-      devices = new Command(null);
+      this.ipAddr = settings.ip;
+      this.macAddr = settings.mac;
+      this.devices = new Command(null);
 
-      isState = devices.getState(ipAddr);
-      isDimming = true;
-      isTemp = true;
-      isScenes = true;
+      this.isState = this.devices.getState(this.ipAddr);
+      this.isDimming = true;
+      this.isTemp = true;
+      this.isScenes = true;
 
-      stat = isState;
+      this.stat = this.isState;
 
-      this.pollDevice(id, devices);
+      this.pollDevice(this.id, this.devices);
 
-      this.setCapabilityValue('onoff', stat);
+      this.setCapabilityValue('onoff', this.isState);
       this.registerCapabilityListener('onoff', async (value) => {
-          stat = value;
+          this.stat = value;
+          this.isState = value;
           const settings = this.getSettings();
-          return await devices.setOnOff(settings.ip, value);
+          return await this.devices.setOnOff(settings.ip, value);
       });
 
       if (isDimming) {
-          dim = devices.getDimming(ipAddr);
-          this.setCapabilityValue('dim', dim);
+          this.dim = this.devices.getDimming(this.ipAddr);
+          this.setCapabilityValue('dim', this.dim);
           this.registerCapabilityListener('dim', async (value) => {
               if (value < 0) {
                   value = 0;
@@ -55,13 +56,13 @@ class WizTuneableDevice extends Device {
                   value = 100;
               }
               const settings = this.getSettings();
-              devices.setBrightness(settings.ip, value);
+              this.devices.setBrightness(settings.ip, value);
           });
       }
 
       if (isTemp) {
-          temp = devices.getTemperature(ipAddr);
-          this.setCapabilityValue('wiz_kelvin', temp);
+          this.temp = this.devices.getTemperature(this.ipAddr);
+          this.setCapabilityValue('wiz_kelvin', this.temp);
           this.registerCapabilityListener('wiz_kelvin', async (value) => {
               if (value < 2100) {
                   value = 2100;
@@ -69,20 +70,21 @@ class WizTuneableDevice extends Device {
                   value = 6000;
               }
               const settings = this.getSettings();
-              devices.setLightTemp(settings.ip, value);
+              this.devices.setLightTemp(settings.ip, value);
           });
       }
 
       if (isScenes) {
+          this.scene = this.devices.getScene(this.ipAddr);
+          this.setCapabilityValue('wiz_scene', this.scene.toString());
           this.registerCapabilityListener('wiz_scene', async (value) => {
-              scene = devices.getScene(ipAddr);
-              this.setCapabilityValue('wiz_scene', scene);
+              this.scene = value;
               const settings = this.getSettings();
-              if (scene == 0) {
-                  scene = 0;
-                  devices.setLightTemp(settings.ip, 2700);
+              if (this.scene == 0) {
+                  this.scene = 0;
+                  this.devices.setLightTemp(settings.ip, 2700);
               } else {
-                  devices.setLightScene(settings.ip, this.scene);
+                  this.devices.setLightScene(settings.ip, this.scene);
               }
           });
       }
@@ -101,7 +103,7 @@ class WizTuneableDevice extends Device {
   async onSettings({ oldSettings, newSettings, changedKeys }) {
       const settings = this.getSettings();
       this.ipAddr = settings.ip;
-      devices = new Command(ipAddr, null);
+      this.devices = new Command(settings.ip, null);
   }
 
   /**
@@ -144,27 +146,26 @@ class WizTuneableDevice extends Device {
       clearInterval(this.pollingInterval);
 
       this.pollingInterval = setInterval(async () => {
-          state = devices.getState(ipAddr);
-          setCapabilityValue('onoff', state);
-          dim = devices.getDimming(ipAddr);
-          this.setCapabilityValue('dim', dim);
-          temp = devices.getTemperature(ipAddr);
-          this.setCapabilityValue('wiz_kelvin', temp);
-          scene = devices.getScene(ipAddr);
-          this.setCapabilityValue('wiz_scene', scene);
+          this.isState = this.devices.getState(this.ipAddr);
+          this.setCapabilityValue('onoff', this.isState);
+          this.dim = this.devices.getDimming(this.ipAddr);
+          this.setCapabilityValue('dim', this.dim);
+          this.temp = this.devices.getTemperature(this.ipAddr);
+          this.setCapabilityValue('wiz_kelvin', this.temp);
+          this.scene = this.devices.getScene(this.ipAddr);
       }, 600000);
   }
 
-    callDimming(dim) {
-        devices.setBrightness(ipAddr, dim);
+    callDimming(xdim) {
+        this.devices.setBrightness(this.ipAddr, xdim);
     }
 
     callLightTemp(ktm) {
-        devices.setLightTemp(ipAddr, ktm);
+        this.devices.setLightTemp(this.ipAddr, ktm);
     }
 
     callSetScene(sce) {
-        devices.setLightScene(ipAddr, sce);
+        this.devices.setLightScene(this.ipAddr, sce);
     }
 }
 

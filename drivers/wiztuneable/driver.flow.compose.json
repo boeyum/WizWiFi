@@ -35,6 +35,7 @@
     },
     {
       "id": "wtune_setscene",
+      "type": "enum",
       "title": {
         "en": "Set white color scene."
       },
