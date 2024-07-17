@@ -29,38 +29,29 @@ class WizColorDevice extends Device {
    * onInit is called when the device is initialized.
    */
   async onInit() {
-      id = this.getData().id;
+      this.id = this.getData().id;
       const settings = this.getSettings();
-      ipAddr = settings.ip;
-      devices = new Command(ipAddr, null);
+      this.ipAddr = settings.ip;
+      this.devices = new Command(ipAddr, null);
+ 
+      this.isState = this.devices.getState(this.ipAddr);
+      this.isDimming = true;
+      this.isTemp = true;
+      this.isColor = true;
+      this.isScenes = true;
 
-      isState = devices.getState(ipAddr);
-      isDimming = true;
-      isTemp = true;
-      isColor = true;
-      isScenes = true;
+      this.pollDevice(this.id, this.devices);
 
-      this.pollDevice(id, devices);
-
-      kod = devices.getState(ipAddr);
-      this.setCapabilityValue('onoff', kod);
+      this.kod = this.devices.getState(this.ipAddr);
+      this.setCapabilityValue('onoff', this.kod);
       this.registerCapabilityListener('onoff', async (value) => {
           this.isState = value;
-          if (value) {
-              var rbgdata = devices.getRGB(this.ipAddr);
-              let jrbg = util.format("{ r: %s, g: %s, b: %s }", rbgdata[0], rbgdata[1], rbgdata[2]);
-              const { h, s, v } = tinycolor(jrbg).toHsv();
-              this.setCapabilityValue('light_hue', h / 360);
-              this.setCapabilityValue('light_saturation', s / 100);
-              var dimdata = devices.getDimming(ipAddr);
-              this.setCapabilityValue('dim', dimdata);
-           }
           const settings = this.getSettings();
-          return await devices.setOnOff(settings.ip, value);
+          return await this.devices.setOnOff(settings.ip, value);
       });
 
       if (isDimming) {
-          var dimdata = devices.getDimming(ipAddr);
+          var dimdata = this.devices.getDimming(this.ipAddr);
           this.setCapabilityValue('dim', dimdata);
           this.registerCapabilityListener('dim', async (value) => {
               if (value < 0) {
@@ -69,12 +60,12 @@ class WizColorDevice extends Device {
                   value = 100;
               }
               const settings = this.getSettings();
-              devices.setBrightness(settings.ip, value);
+              this.devices.setBrightness(settings.ip, value);
           });
       }
 
       if (isColor) {
-          var rbgdata = devices.getRGB(ipAddr);
+          let rbgdata = this.devices.getRGB(this.ipAddr);
           this.red = rbgdata[0];
           this.grn = rbgdata[1];
           this.blu = rbgdata[2];
@@ -95,9 +86,9 @@ class WizColorDevice extends Device {
               const settings = this.getSettings();
               if (sce == 0) {
                   sce = 0;
-                  devices.setLightTemp(settings.ip, 2700);
+                  this.devices.setLightTemp(settings.ip, 2700);
               } else {
-                  devices.setLightScene(settings.ip, sce);
+                  this.devices.setLightScene(settings.ip, sce);
               }
           });
       }
@@ -123,7 +114,7 @@ class WizColorDevice extends Device {
         this.blu = kode.b;
         const settings = this.getSettings();
         if (this.isState) {
-            devices.setColorRGB(settings.ip, this.red, this.grn, this.blu);
+            this.devices.setColorRGB(settings.ip, this.red, this.grn, this.blu);
         }
     }
 
@@ -140,7 +131,7 @@ class WizColorDevice extends Device {
   async onSettings({ oldSettings, newSettings, changedKeys }) {
       const settings = this.getSettings();
       this.ipAddr = settings.ip;
-      devices = new Command(ipAddr, null);
+      this.devices = new Command(settings.ip, null);
   }
 
   /**
@@ -177,32 +168,32 @@ class WizColorDevice extends Device {
       clearInterval(this.pollingInterval);
 
       this.pollingInterval = setInterval(async () => {
-          this.state = devices.getState(ipAddr);
-          setCapabilityValue('onoff', this.state);
-          this.dim = devices.getDimming(ipAddr);
-          this.setCapabilityValue('dim', dim);
-          this.tmp = devices.getTemperature(ipAddr);
-          this.sce = devices.getScene(ipAddr);
-          this.setCapabilityValue('wiz_scene', scene);
-          var rbgdata = devices.getRGB(ipAddr);
-          this.red = rbgdata[0];
-          this.grn = rbgdata[1];
-          this.blu = rbgdata[2];
+          this.isState = this.devices.getState(this.ipAddr);
+          this.setCapabilityValue('onoff', this.isState);
+          this.dim = this.devices.getDimming(this.ipAddr);
+          this.setCapabilityValue('dim', this.dim);
+          this.tmp = this.devices.getTemperature(this.ipAddr);
+          this.sce = this.devices.getScene(this.ipAddr);
+          let _rbgdata = this.devices.getRGB(this.ipAddr);
+          this.red = _rbgdata[0];
+          this.grn = _rbgdata[1];
+          this.blu = _rbgdata[2];
           let jrbg = util.format("{ r: %s, g: %s, b: %s }", this.red, this.grn, this.blu);
           const { h, s, v } = tinycolor(jrbg).toHsv();
           this.hue = h;
           this.sat = s;
-          this.setCapabilityValue('light_hue', h / 360);
-          this.setCapabilityValue('light_saturation', s / 100);
+          this.setCapabilityValue('light_hue', (this.hue / 360));
+          this.setCapabilityValue('light_saturation', this.sat);
       }, 600000);
   }
 
-  callDimming(dim) {
-      devices.setBrightness(ipAddr, dim);
+  callDimming(xdim) {
+      this.devices.setBrightness(this.ipAddr, xdim);
   }
 
   callScene(sid) {
-      devices.setLightScene(ipAddr, sid);
+      var sce = parseInt(sid);
+      this.devices.setLightScene(this.ipAddr, sce);
   }
 
 }
