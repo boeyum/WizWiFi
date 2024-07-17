@@ -79,11 +79,9 @@ The following device drivers are new and replace the old ones and also have new 
   </tr>
 </table></center>
 <br><br>
-
 ## DOKUMENTATION
 Documentation of the WizBulbs app can be found on the website: [https://www.boyum.priv.no/WizWiFi/](https://www.boyum.priv.no/WizWiFi/)
 <br><br>
-
 # Remarks
 This app is experimental and may therefore contain errors and omissions. The app is not based an official library from Wiz and all use of the app is at your own risk.
 
@@ -97,10 +95,17 @@ This app is experimental and may therefore contain errors and omissions. The app
 
 **1.0.3** Local Version (bug fix)
 
-**1.0.4** Local Version (bug fix)
+**1.0.3** Local Version (bug fix)
 
 **1.0.5** First official release version of the app after testing. 
+
+**1.0.6** Bug fix.
+
+**1.0.7** Corrected logical errors in Devices
+
+**1.1.0** Version submitted to Homey for Certification
 
 
 # Licens
 [MIT](https://github.com)
+
