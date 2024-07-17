@@ -8,11 +8,10 @@ var ipAddr = null;
 var macAddr = null;
 var devices = null;
 var isState = false;
-var stat = false;
 var power = 0;
 var limit = 0;
 
-var stat = 0;
+var stat = false;
 var kod = 0;
 
 class WizSocketDevice extends Device {
@@ -21,23 +20,23 @@ class WizSocketDevice extends Device {
    * onInit is called when the device is initialized.
    */
   async onInit() {
-      id = this.getData('id');
+      this.id = this.getData('id');
       const settings = this.getSettings();
-      ipAddr = settings.ip;
-      macAddr = settings.mac;
-      devices = new Command(null);
+      this.ipAddr = settings.ip;
+      this.macAddr = settings.mac;
+      this.devices = new Command(null);
 
-      isState = devices.getState(ipAddr);
+      this.isState = this.devices.getState(this.ipAddr);
 
-      stat = isState;
+      this.stat = this.isState;
 
-      this.pollDevice(id, devices);
+      this.pollDevice(this.id, this.devices);
 
-      this.setCapabilityValue('onoff', isState);
+      this.setCapabilityValue('onoff', this.isState);
       this.registerCapabilityListener('onoff', async (value) => {
           this.isState = value;
           const settings = this.getSettings();
-          return await devices.setOnOff(settings.ip, value);
+          return await this.devices.setOnOff(settings.ip, value);
       });
   }
 
@@ -54,7 +53,7 @@ class WizSocketDevice extends Device {
   async onSettings({ oldSettings, newSettings, changedKeys }) {
       const settings = this.getSettings();
       this.ipAddr = settings.ip;
-      devices = new Command(ipAddr, null);
+      this.devices = new Command(this.ipAddr, null);
   }
 
   /**
@@ -79,8 +78,8 @@ class WizSocketDevice extends Device {
       clearInterval(this.pollingInterval);
 
       this.pollingInterval = setInterval(async () => {
-          stat = devices.getState(ipAddr);
-          this.setCapabilityValue('onoff', stat);
+          this.isState = this.devices.getState(this.ipAddr);
+          this.setCapabilityValue('onoff', this.isState);
       }, 600000);
   }
 
