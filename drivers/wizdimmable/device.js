@@ -8,6 +8,7 @@ var ipAddr = null;
 var devices = null;
 var isState = false;
 var isDimming = true;
+var dim = 50;
 var kod = 0;
 
 class WizDimmableDevice extends Device {
@@ -16,26 +17,26 @@ class WizDimmableDevice extends Device {
    * onInit is called when the device is initialized.
    */
   async onInit() {
-      id = this.getData().id;
+      this.id = this.getData().id;
       const settings = this.getSettings();
-      ipAddr = settings.ip;
-      devices = new Command(null);
+      this.ipAddr = settings.ip;
+      this.devices = new Command(null);
 
-      isDimming = true;
+      this.isDimming = true;
 
-      this.pollDevice(id, devices);
+      this.pollDevice(this.id, this.devices);
 
-      isState = devices.getState(ipAddr);
+      this.isState = this.devices.getState(this.ipAddr);
       this.setCapabilityValue('onoff', isState);
       this.registerCapabilityListener('onoff', async (value) => {
           this.isState = value;
           const settings = this.getSettings();
-          return await devices.setOnOff(settings.ip, value);
+          return await this.devices.setOnOff(settings.ip, value);
       });
 
       if (isDimming) {
-          var dimdata = devices.getDimming(ipAddr);
-          this.setCapabilityValue('dim', dimdata);
+          this.dim = this.devices.getDimming(ipAddr);
+          this.setCapabilityValue('dim', this.dim);
           this.registerCapabilityListener('dim', async (value) => {
               if (value < 0) {
                   value = 0;
@@ -43,7 +44,7 @@ class WizDimmableDevice extends Device {
                   value = 100;
               }
               const settings = this.getSettings();
-              devices.setBrightness(settings.ip, value);
+              this.devices.setBrightness(settings.ip, value);
           });
       }
   }
@@ -61,7 +62,7 @@ class WizDimmableDevice extends Device {
   async onSettings({ oldSettings, newSettings, changedKeys }) {
        const settings = this.getSettings();
        this.ipAddr = settings.ip;
-       devices = new Command(ipAddr, null);
+      this.devices = new Command(settings.ip, null);
   }
 
   /**
@@ -93,16 +94,16 @@ class WizDimmableDevice extends Device {
       clearInterval(this.pollingInterval);
 
       this.pollingInterval = setInterval(async () => {
-          state = devices.getState(ipAddr);
-          setCapabilityValue('onoff', this.state);
-          dim = devices.getDimming(ipAddr);
+          this.isState = this.devices.getState(ipAddr);
+          this.setCapabilityValue('onoff', isState);
+          this.dim = this.devices.getDimming(ipAddr);
           this.setCapabilityValue('dim', dim);
       }, 600000);
   }
 
-    callDimming(dim) {
+    callDimming(xdim) {
       console.log(dim);
-      devices.setBrightness(ipAddr, dim);
+        this.devices.setBrightness(this.ipAddr, xdim);
   }
 }
 
