@@ -1,4 +1,4 @@
-##<i>This app is renamed to WizLan and will be maintained under the new name. The reason it is renamed is that the app is tried to be posted at Homey App store. Homey's standard recommended giving the app a new name as the old one was not explanatory enough.</i>
+## <i>This app is renamed to WizLan and will be maintained under the new name. The reason it is renamed is that the app is tried to be posted at Homey App store. Homey's standard recommended giving the app a new name as the old one was not explanatory enough.</i>
 <br><br>
 # WizWifi app for Homey *(Unofficial app for Wiz Connected devices.)*
 
