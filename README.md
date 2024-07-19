@@ -1,3 +1,5 @@
+##<i>This app is renamed to WizLan and will be maintained under the new name. The reason it is renamed is that the app is tried to be posted at Homey App store. Homey's standard recommended giving the app a new name as the old one was not explanatory enough.</i>
+<br><br>
 # WizWifi app for Homey *(Unofficial app for Wiz Connected devices.)*
 
 The company Wiz ([https://www.wizconnected.com/](https://www.wizconnected.com/)) has developed several smart light bulbs and other devices based on a WiFi interface. In order to be able to use the bulbs and other devices (in the local WiFi network) together with Homey, there was a need to develop a new app. The app is not based on any official API from Wiz, and the use of the app is therefore at your own risk.
